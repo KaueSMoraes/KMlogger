@@ -75,17 +75,17 @@ jobs:
             echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
             # Remove imagens antigas na VPS
-            docker rmi -f kauemoraes/kmlogger-app:api-stage || true
+            docker rmi -f kauemoraes/kmlogger-app:api-main || true
 
             # Faz pull das novas imagens
-            docker pull kauemoraes/kmlogger-app:api-stage
+            docker pull kauemoraes/kmlogger-app:api-main
 
             # Para e remove containers antigos
             docker ps -q --filter "name=kmlogger-app-api" | xargs -r docker stop
             docker ps -aq --filter "name=kmlogger-app-api" | xargs -r docker rm -f
 
             # Sobe os novos containers
-            docker run -d --restart unless-stopped --name kmlogger-app-api -p 5070:5070 kauemoraes/kmlogger-app:api-stage
+            docker run -d --restart unless-stopped --name kmlogger-app-api -p 5070:5070 kauemoraes/kmlogger-app:api-main
 
             # Verifica os containers rodando
             docker ps -a
