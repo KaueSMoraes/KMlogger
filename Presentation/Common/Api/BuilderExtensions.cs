@@ -15,7 +15,7 @@ using Microsoft.IdentityModel.Tokens;
 using Application.DI;
 
 namespace Presentation.Common.Api;
-
+//
 internal static class BuilderExtensions
 {
     internal static void AddConfiguration(
