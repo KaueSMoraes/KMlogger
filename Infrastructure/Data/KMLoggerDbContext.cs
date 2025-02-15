@@ -8,7 +8,7 @@ namespace Infrastructure.Data;
 
 internal class KMLoggerDbContext : DbContext
 {
-    internal KMLoggerDbContext(DbContextOptions<KMLoggerDbContext> options) : base(options) { }
+    public KMLoggerDbContext(DbContextOptions<KMLoggerDbContext> options) : base(options) { }
 
     internal DbSet<User> Users { get; init; }
     internal DbSet<Role> Roles { get; init; }
