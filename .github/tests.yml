@@ -1,0 +1,42 @@
+name: Run Tests and Publish Results
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+  checks: write
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '9.0.x'
+
+      - name: Run Tests
+        run: dotnet test --logger "junit;LogFilePath=/home/runner/work/KMlogger/KMlogger/.Test/test-results/test-results.xml"
+
+      - name: Debug Test Results
+        run: ls -R /home/runner/work/KMlogger/KMlogger/Test/test-results || echo "Test results directory not found"
+
+      - name: Ensure Test Results Exist
+        run: |
+          if [ ! -f "/home/runner/work/KMlogger/KMlogger/Test/test-results/test-results.xml" ]; then
+            echo "Test results file not found!";
+            exit 1;
+          fi
+
+      - name: Publish Test Results
+        uses: dorny/test-reporter@v1
+        with:
+          name: Test Results
+          path: /home/runner/work/KMlogger/KMlogger/Test/test-results/test-results.xml
+          reporter: java-junit
+          fail-on-error: false

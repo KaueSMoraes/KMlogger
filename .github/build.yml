@@ -1,0 +1,31 @@
+name: Build 
+
+on:
+  pull_request:
+    branches:
+      - stage
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    
+    steps:
+      # Checkout do código
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      # Configuração do .NET 
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: '9.0.x'
+
+      # Restaurar dependências para todos os projetos
+      - name: Restore dependencies for all projects
+        run: |
+          find . -name '*.csproj' -exec dotnet restore {} \;
+
+      # Build de todos os projetos
+      - name: Build the solution
+        run: dotnet build ScoreBlog.sln --configuration Release
