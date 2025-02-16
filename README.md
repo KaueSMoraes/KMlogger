@@ -1,2 +1,2 @@
-# KMlog
-Pacote Nuget de logs para Apis em AspNetCore.
+# KMlogger
+Backend da KMLogger.
