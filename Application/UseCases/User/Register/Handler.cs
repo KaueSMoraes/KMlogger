@@ -41,7 +41,7 @@ internal class Handler : IRequestHandler<Request, Response>
         await _dbCommit.Commit(cancellationToken);
         
         await _emailService.SendEmailAsync(user.FullName.FirstName, user.Email.Address!, "Ative sua Conta!",
-            $"<strong> Seu código de Ativação da Conta: {user.TokenActivate} <strong>", "ScoreBlog",
+            $"<strong> Seu código de Ativação da Conta: {user.TokenActivate} <strong>", "KMLogger",
             Configuration.SmtpUser, cancellationToken);
         
         return _mapper.Map<Response>(user);

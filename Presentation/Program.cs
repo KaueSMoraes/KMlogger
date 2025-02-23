@@ -1,4 +1,5 @@
 
+using Domain;
 using Presentation.Common.Api;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,6 +21,7 @@ if (app.Environment.IsDevelopment())
     app.ConfigureDevEnvironment();
 
 app.UseRouting();
+app.UseCors(Configuration.CorsPolicyName);
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
