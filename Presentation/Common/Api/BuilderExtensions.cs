@@ -26,8 +26,8 @@ internal static class BuilderExtensions
         Configuration.BackendUrl = Environment.GetEnvironmentVariable("BACKEND_URL") ?? string.Empty;
         Configuration.VersionApi = Environment.GetEnvironmentVariable("VERSION_API") ?? string.Empty;
         Configuration.ApiKey = Environment.GetEnvironmentVariable("API_KEY") ?? string.Empty;
-        Configuration.ApiKeyAttribute = "api_key";
-        Configuration.FrontendUrl = Environment.GetEnvironmentVariable("FRONTEND_URL") ?? string.Empty;
+        Configuration.ApiKeyAttribute = "X-API-KEY";
+        Configuration.FrontendUrl = Environment.GetEnvironmentVariable("FRONTEND_URL") ?? "http://localhost:4200";
         Configuration.AwsKeyId = Environment.GetEnvironmentVariable("AWS_KEY_ID") ?? string.Empty;
         Configuration.AwsKeySecret = Environment.GetEnvironmentVariable("AWS_KEY_SECRET") ?? string.Empty;
         Configuration.AwsRegion = Environment.GetEnvironmentVariable("AWS_REGION") ?? string.Empty;
@@ -104,7 +104,8 @@ internal static class BuilderExtensions
                 policy => policy
                     .WithOrigins([
                         Configuration.BackendUrl,
-                        Configuration.FrontendUrl
+                        Configuration.FrontendUrl,
+                        Configuration.FrontendUrl.Replace("http://", "https://"),
                     ])
                     .AllowAnyMethod()
                     .AllowAnyHeader()
