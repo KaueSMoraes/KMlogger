@@ -21,12 +21,14 @@ public class UserMapping : IEntityTypeConfiguration<User>
         builder.Property(c => c.CreatedDate)
             .HasColumnName("CreatedDate")
             .HasColumnType("timestamp")
-            .IsRequired();
+            .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
         builder.Property(c => c.UpdatedDate)
             .HasColumnName("UpdatedDate")
             .HasColumnType("timestamp")
-            .IsRequired();
+            .IsRequired()
+            .HasDefaultValueSql("CURRENT_TIMESTAMP") 
+            .ValueGeneratedOnAddOrUpdate();
 
         builder.Property(c => c.DeletedDate)
             .HasColumnName("DeletedDate")

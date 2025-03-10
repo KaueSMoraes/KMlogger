@@ -42,7 +42,7 @@ internal class UserController(IMediator mediator) : InternalControllerBase
         try
         {
             var response = await mediator.Send(request, cancellationToken);
-            return StatusCode(response.statuscode, response);
+            return StatusCode(response.statuscode, new { response.statuscode, response.message, response.notifications});
         }
         catch (SmtpException e)
         {

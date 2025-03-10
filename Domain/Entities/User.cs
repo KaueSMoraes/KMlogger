@@ -21,7 +21,7 @@ public class User : Entity
     
     public User(FullName? fullName, Email? email, Address? address, bool active, Password? password)
     {
-        AddNotificationsFromValueObjects(fullName, email, address, password);
+        AddNotificationsFromValueObjects(fullName, email, password);
         FullName = fullName;
         Email = email;
         Address = address;

@@ -17,7 +17,7 @@ public record BaseResponse
     {
         this.message = message;
         this.statuscode = statuscode;
-        this.notifications = notifications != null && notifications.Any() ? this.notifications : null;
+        this.notifications = notifications != null && notifications.Any() ? notifications : null;
     }
 }
     

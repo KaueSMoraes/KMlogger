@@ -37,6 +37,15 @@ namespace Infrastructure.Data.Migrations
                         .HasColumnType("text")
                         .HasColumnName("AwsKey");
 
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<DateTime>("UrlExpired")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("UrlExpired");
@@ -92,9 +101,11 @@ namespace Infrastructure.Data.Migrations
                         .HasColumnType("boolean")
                         .HasColumnName("Active");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp")
-                        .HasColumnName("CreatedDate");
+                        .HasColumnName("CreatedDate")
+                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("timestamp")
@@ -105,8 +116,10 @@ namespace Infrastructure.Data.Migrations
                         .HasColumnName("TokenActivate");
 
                     b.Property<DateTime>("UpdatedDate")
+                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("timestamp")
-                        .HasColumnName("UpdatedDate");
+                        .HasColumnName("UpdatedDate")
+                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
                     b.HasKey("Id")
                         .HasName("PK_Users");
