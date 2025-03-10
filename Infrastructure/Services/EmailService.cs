@@ -6,7 +6,7 @@ using Domain.Interfaces.Services;
 
 namespace Infrastructure.Services;
 
-internal class EmailService : IEmailService
+public class EmailService : IEmailService
 {
     public async Task SendEmailAsync(string toName, string toEmail, string subject, string body, string fromName,
         string fromEmail, CancellationToken cancellationToken)

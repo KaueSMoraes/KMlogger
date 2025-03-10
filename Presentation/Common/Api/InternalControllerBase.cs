@@ -5,9 +5,9 @@ using Microsoft.AspNetCore.Mvc.Controllers;
 
 namespace Presentation.Common.Api;
 
-internal class InternalControllerBase : Controller;
+public class InternalControllerBase : Controller;
 
-internal class CustomControllerFeatureProvider : ControllerFeatureProvider
+public class CustomControllerFeatureProvider : ControllerFeatureProvider
 {
     protected override bool IsController(TypeInfo typeInfo)
     {
@@ -16,9 +16,9 @@ internal class CustomControllerFeatureProvider : ControllerFeatureProvider
     }
 }
 
-internal static class InternalControllersExtension
+public static class InternalControllersExtension
 {
-    internal static IMvcBuilder EnableInternalControllers(this IMvcBuilder builder)
+    public static IMvcBuilder EnableInternalControllers(this IMvcBuilder builder)
     {
         builder.ConfigureApplicationPartManager(manager =>
         {

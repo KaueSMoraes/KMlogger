@@ -5,7 +5,7 @@ using Npgsql;
 
 namespace Infrastructure.Data;
 
-internal class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<KMLoggerDbContext>
+public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<KMLoggerDbContext>
 {
     public KMLoggerDbContext CreateDbContext(string[] args)
     {
@@ -28,9 +28,9 @@ internal class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<KMLogger
     }
 }
 
-internal static class StringConnection
+public static class StringConnection
 {
-    internal static string BuildConnectionString()
+    public static string BuildConnectionString()
     {
         var builder = new NpgsqlConnectionStringBuilder
         {

@@ -3,15 +3,15 @@ using Flunt.Br;
 
 namespace Domain.ValueObjects;
 
-internal class AppFile : BaseValueObject 
+public class AppFile : BaseValueObject 
 {
     [NotMapped]
-    internal Stream File { get; private set; } = null!;
-    internal string FileName { get; private set; } = null!;
-    internal long FileSize { get; private set; }
+    public Stream File { get; private set; } = null!;
+    public string FileName { get; private set; } = null!;
+    public long FileSize { get; private set; }
 
     private AppFile(){}
-    internal AppFile(Stream file, string fileName)
+    public AppFile(Stream file, string fileName)
     {
         AddNotifications(
             new Contract()

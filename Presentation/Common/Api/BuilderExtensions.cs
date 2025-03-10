@@ -16,9 +16,9 @@ using Application.DI;
 
 namespace Presentation.Common.Api;
 
-internal static class BuilderExtensions
+public static class BuilderExtensions
 {
-    internal static void AddConfiguration(
+    public static void AddConfiguration(
         this WebApplicationBuilder builder)
     {
         Configuration.IsDevelopment = builder.Environment.IsDevelopment();
@@ -70,7 +70,7 @@ internal static class BuilderExtensions
         builder.Logging.AddDebug();
     }
 
-    internal static void AddSecurity(this WebApplicationBuilder builder)
+    public static void AddSecurity(this WebApplicationBuilder builder)
     {
         builder.Services.AddAuthentication(x =>
         {
@@ -88,7 +88,7 @@ internal static class BuilderExtensions
         builder.Services.AddAuthorization();
     }
 
-    internal static void AddDataContexts(this WebApplicationBuilder builder)
+    public static void AddDataContexts(this WebApplicationBuilder builder)
     {
         builder
             .Services
@@ -96,7 +96,7 @@ internal static class BuilderExtensions
                 x => { x.UseNpgsql(StringConnection.BuildConnectionString()); });
     }
 
-    internal static void AddCrossOrigin(this WebApplicationBuilder builder)
+    public static void AddCrossOrigin(this WebApplicationBuilder builder)
     {
         builder.Services.AddCors(
             options => options.AddPolicy(
@@ -113,7 +113,7 @@ internal static class BuilderExtensions
             ));
     }
 
-    internal static void AddServices(this WebApplicationBuilder builder)
+    public static void AddServices(this WebApplicationBuilder builder)
     {
         builder.Services.Configure<ForwardedHeadersOptions>(options =>
         {

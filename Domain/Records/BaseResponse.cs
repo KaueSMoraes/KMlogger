@@ -3,17 +3,17 @@ using Flunt.Notifications;
 
 namespace Domain.Records;
 
-internal record BaseResponse
+public record BaseResponse
 {
-    internal int statuscode;
+    public int statuscode;
     
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    internal string? message = string.Empty;
+    public string? message = string.Empty;
     
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-    internal List<Notification>? notifications = null!;
+    public List<Notification>? notifications = null!;
 
-    internal BaseResponse(int statuscode, string message, List<Notification>? notifications = null)
+    public BaseResponse(int statuscode, string message, List<Notification>? notifications = null)
     {
         this.message = message;
         this.statuscode = statuscode;

@@ -3,4 +3,4 @@ using MediatR;
 
 namespace Application.UseCases.User.ForgotPassword;
 
-internal record Request(string Email) : IRequest<BaseResponse>;
+public record Request(string Email) : IRequest<BaseResponse>;

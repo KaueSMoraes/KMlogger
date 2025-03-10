@@ -2,12 +2,12 @@ using Flunt.Notifications;
 
 namespace Domain.Entities;
 
-internal abstract class Entity : Notifiable<Notification>
+public abstract class Entity : Notifiable<Notification>
 {
-    internal Guid Id { get; private set; }
-    internal DateTime? CreatedDate { get;  private set; }
-    internal DateTime? UpdatedDate { get;  private set; }
-    internal DateTime? DeletedDate { get;  private set; }
+    public Guid Id { get; private set; }
+    public DateTime? CreatedDate { get;  private set; }
+    public DateTime? UpdatedDate { get;  private set; }
+    public DateTime? DeletedDate { get;  private set; }
     
     protected void AddNotificationsFromValueObjects(params List<Notifiable<Notification>> valueObjects)
     {
@@ -16,8 +16,8 @@ internal abstract class Entity : Notifiable<Notification>
             AddNotifications(valueObject.Notifications);
         }
     }
-    internal void SetValuesUpdate() => UpdatedDate = DateTime.Now;
-    internal void SetValuesDelete() => DeletedDate = DateTime.Now;
-    internal void SetValuesCreate() => CreatedDate = UpdatedDate = DateTime.Now;
+    public void SetValuesUpdate() => UpdatedDate = DateTime.Now;
+    public void SetValuesDelete() => DeletedDate = DateTime.Now;
+    public void SetValuesCreate() => CreatedDate = UpdatedDate = DateTime.Now;
     
 }

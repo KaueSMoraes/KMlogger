@@ -2,10 +2,10 @@ using System;
 
 namespace Presentation.Common.Api;
 
-internal static class AppExtensions
+public static class AppExtensions
 {
     #region ConfigureEnvironment
-    internal static void ConfigureDevEnvironment(this WebApplication app)
+    public static void ConfigureDevEnvironment(this WebApplication app)
     {
         app.UseHttpsRedirection();
         app.UseForwardedHeaders();
@@ -13,7 +13,7 @@ internal static class AppExtensions
     #endregion ConfigureEnvironment
 
     #region Security
-    internal static void UseSecurity(this WebApplication app)
+    public static void UseSecurity(this WebApplication app)
     {
         app.UseAuthentication();
         app.UseAuthorization();

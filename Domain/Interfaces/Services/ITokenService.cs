@@ -3,7 +3,7 @@ using Domain.Entities;
 
 namespace Domain.Interfaces.Services;
 
-internal interface ITokenService
+public interface ITokenService
 {
     string GenerateToken(User user);
 }

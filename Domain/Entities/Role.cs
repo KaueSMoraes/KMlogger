@@ -3,14 +3,14 @@ using Domain.ValueObjects;
 
 namespace Domain.Entities;
 
-internal class Role : Entity
+public class Role : Entity
 {
-    internal UniqueName Name { get; private set; }
-    internal string Slug { get; private set; }
-    internal IList<User>? Users { get;  private set; }
+    public UniqueName Name { get; private set; }
+    public string Slug { get; private set; }
+    public IList<User>? Users { get;  private set; }
     
     private Role(){}
-    internal Role(UniqueName name, string slug, IList<User> users)
+    public Role(UniqueName name, string slug, IList<User> users)
     {
         AddNotificationsFromValueObjects(name);
         Name = name;

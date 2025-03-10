@@ -7,9 +7,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Infrastructure.DI;
 
-internal static class ServicesExtensions
+public static class ServicesExtensions
 {
-    internal static void ConfigureInfraServices(this IServiceCollection services)
+    public static void ConfigureInfraServices(this IServiceCollection services)
     {
         services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
         services.AddScoped<IDbCommit, DbCommit>();

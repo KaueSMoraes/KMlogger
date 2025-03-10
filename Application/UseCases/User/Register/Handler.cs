@@ -9,7 +9,7 @@ using MediatR;
 
 namespace Application.UseCases.User.Register;
 
-internal class Handler : IRequestHandler<Request, Response>
+public class Handler : IRequestHandler<Request, Response>
 {
     private readonly IUserRepository _userRepository;
     private readonly IMapper _mapper;

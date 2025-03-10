@@ -6,13 +6,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Data;
 
-internal class KMLoggerDbContext : DbContext
+public class KMLoggerDbContext : DbContext
 {
     public KMLoggerDbContext(DbContextOptions<KMLoggerDbContext> options) : base(options) { }
 
-    internal DbSet<User> Users { get; init; }
-    internal DbSet<Role> Roles { get; init; }
-    internal DbSet<Picture> Pictures { get; init; }
+    public DbSet<User> Users { get; init; }
+    public DbSet<Role> Roles { get; init; }
+    public DbSet<Picture> Pictures { get; init; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

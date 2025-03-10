@@ -6,7 +6,7 @@ using Domain.Interfaces.Repositories;
 
 namespace Test.Repositories;
 
-internal class FakeUserRepository : IUserRepository
+public class FakeUserRepository : IUserRepository
 {
     private readonly ConcurrentDictionary<Guid, User> _users = new();
 

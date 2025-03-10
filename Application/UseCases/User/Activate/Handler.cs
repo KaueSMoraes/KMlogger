@@ -5,7 +5,7 @@ using MediatR;
 
 namespace Application.UseCases.User.Activate;
 
-internal class Handler : IRequestHandler<Request, BaseResponse>
+public class Handler : IRequestHandler<Request, BaseResponse>
 {
     private readonly IUserRepository _userRepository;
     private readonly IDbCommit _dbCommit;

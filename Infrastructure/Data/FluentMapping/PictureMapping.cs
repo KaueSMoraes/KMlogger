@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Data.FluentMapping;
 
-internal class PictureMapping : IEntityTypeConfiguration<Picture>
+public class PictureMapping : IEntityTypeConfiguration<Picture>
 {
     public void Configure(EntityTypeBuilder<Picture> builder)
     {

@@ -5,16 +5,16 @@ using Flunt.Br;
 
 namespace Domain.ValueObjects;
 
-internal sealed class Password : BaseValueObject
+public sealed class Password : BaseValueObject
 {
-    internal string Hash { get; private set; }
-    internal string Salt { get; private set; }
+    public string Hash { get; private set; }
+    public string Salt { get; private set; }
     [NotMapped]
-    internal string Content { get; private set; }
+    public string Content { get; private set; }
 
-    internal Password() { }
+    public Password() { }
 
-    internal Password(string? password, bool forAuthentication = false)
+    public Password(string? password, bool forAuthentication = false)
     {
         if (forAuthentication)
         {
@@ -54,7 +54,7 @@ internal sealed class Password : BaseValueObject
     }
 
 
-    internal bool VerifyPassword(string password, string storedSalt)
+    public bool VerifyPassword(string password, string storedSalt)
     {
         var hashToVerify = GenerateHash(password, storedSalt); 
         return hashToVerify == Hash; 

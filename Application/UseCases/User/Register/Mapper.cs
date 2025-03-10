@@ -4,7 +4,7 @@ using Domain.ValueObjects;
 
 namespace Application.UseCases.User.Register;
 
-internal class Mapper : Profile
+public class Mapper : Profile
 {
     public Mapper()
     {

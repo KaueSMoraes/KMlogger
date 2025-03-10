@@ -2,15 +2,15 @@ using Flunt.Br;
 
 namespace Domain.ValueObjects;
 
-internal class Address : BaseValueObject
+public class Address : BaseValueObject
 {
-    internal string? Road { get; private set; }
-    internal string? NeighBordHood { get; private set; }
-    internal long? Number { get; private set; }
-    internal string? Complement  { get; private set; }
+    public string? Road { get; private set; }
+    public string? NeighBordHood { get; private set; }
+    public long? Number { get; private set; }
+    public string? Complement  { get; private set; }
 
     private Address(){}
-    internal Address(long? number, string? neighBordHood, string? road, string? complement)
+    public Address(long? number, string? neighBordHood, string? road, string? complement)
     {
         AddNotifications(
             new Contract()

@@ -3,7 +3,7 @@ using Domain.Entities;
 
 namespace Domain.Interfaces.Repositories;
 
-internal interface IBaseRepository<T> where T : Entity
+public interface IBaseRepository<T> where T : Entity
 {
     Task CreateAsync(T entity, CancellationToken cancellationToken);
     Task<T> CreateReturnEntity(T entity, CancellationToken cancellationToken);

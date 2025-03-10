@@ -4,9 +4,9 @@ using Domain.ValueObjects;
 
 namespace Application.UseCases.User.Login;
 
-internal class Mapper : Profile
+public class Mapper : Profile
 {
-    internal Mapper()
+    public Mapper()
     {
         CreateMap<Request, Domain.Entities.User>()
             .ForMember(dest => dest.Password, opt => opt.MapFrom(src => new Password(src.password, true)))

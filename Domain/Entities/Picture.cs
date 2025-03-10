@@ -4,17 +4,17 @@ using Flunt.Br;
 
 namespace Domain.Entities;
 
-internal class Picture : Entity
+public class Picture : Entity
 {
-    internal AppFile File { get; private set; } = null!;
-    internal UniqueName Name { get; private set; } = null!;
-    internal string AwsKey { get;  private set; } = null!;
-    internal DateTime UrlExpired { get; private set; }
-    internal string UrlTemp { get; private set; } = null!;
-    internal bool Ativo { get; private set; }
+    public AppFile File { get; private set; } = null!;
+    public UniqueName Name { get; private set; } = null!;
+    public string AwsKey { get;  private set; } = null!;
+    public DateTime UrlExpired { get; private set; }
+    public string UrlTemp { get; private set; } = null!;
+    public bool Ativo { get; private set; }
     
     private Picture(){}
-    internal Picture(AppFile file, UniqueName name, string awsKey, DateTime urlExpired, string urlTemp, bool ativo)
+    public Picture(AppFile file, UniqueName name, string awsKey, DateTime urlExpired, string urlTemp, bool ativo)
     {
         AddNotifications(
             new Contract()

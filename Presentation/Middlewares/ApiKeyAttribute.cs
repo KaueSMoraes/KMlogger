@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 namespace Presentation.Middlewares;
 
 [AttributeUsage(validOn: AttributeTargets.Method)]
-internal class ApiKey : Attribute, IAsyncActionFilter
+public class ApiKey : Attribute, IAsyncActionFilter
 {
     public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
     {

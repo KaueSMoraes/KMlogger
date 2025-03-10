@@ -3,10 +3,10 @@ using Flunt.Br;
 
 namespace Domain.ValueObjects;
 
-internal class UniqueName : BaseValueObject
+public class UniqueName : BaseValueObject
 {
-    internal string Name { get; private set; }
-    internal UniqueName(string name)
+    public string Name { get; private set; }
+    public UniqueName(string name)
     {
         AddNotifications(
             new Contract()

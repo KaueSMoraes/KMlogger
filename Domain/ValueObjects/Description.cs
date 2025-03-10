@@ -2,11 +2,11 @@ using Flunt.Br;
 
 namespace Domain.ValueObjects;
 
-internal class Description : BaseValueObject
+public class Description : BaseValueObject
 {
-    internal string Text { get; private set; }
+    public string Text { get; private set; }
 
-    internal Description(string text)
+    public Description(string text)
     {
         AddNotifications(
             new Contract().Requires().IsNotNullOrEmpty(text, Key, "Description cannot be null or empty")

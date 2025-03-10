@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories;
 
-internal class BaseRepository<T>(KMLoggerDbContext context)
+public class BaseRepository<T>(KMLoggerDbContext context)
     : IBaseRepository<T>
     where T : Entity
 {
@@ -27,9 +27,7 @@ internal class BaseRepository<T>(KMLoggerDbContext context)
     }
 
     public virtual void Update(T entity)
-    {
-        context.Update(entity);
-    }
+        => context.Update(entity);
 
     public virtual async Task DeleteAsync(T entity,
         CancellationToken cancellationToken = default)

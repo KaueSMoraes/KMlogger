@@ -2,12 +2,12 @@ using Flunt.Br;
 
 namespace Domain.ValueObjects;
 
-internal class FullName : BaseValueObject
+public class FullName : BaseValueObject
 {
-    internal string FirstName { get; private set; }
-    internal string LastName  { get; private set; }
+    public string FirstName { get; private set; }
+    public string LastName  { get; private set; }
 
-    internal FullName(string firstName, string lastName)
+    public FullName(string firstName, string lastName)
     {
         AddNotifications(
             new Contract()
