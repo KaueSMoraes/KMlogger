@@ -7,7 +7,7 @@ using MediatR;
 
 namespace Application.UseCases.User.ForgotPassword;
 
-public class Handler : IRequestHandler<Request, BaseResponse>
+internal class Handler : IRequestHandler<Request, BaseResponse>
 {
      private readonly IUserRepository _userRepository;
      private readonly IDbCommit _dbCommit;

@@ -3,4 +3,4 @@ using MediatR;
 
 namespace Application.UseCases.User.Activate;
 
-public record Request(string email,long token) : IRequest<BaseResponse>;
+internal record Request(string email,long token) : IRequest<BaseResponse>;

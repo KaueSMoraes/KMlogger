@@ -16,7 +16,7 @@ using Application.DI;
 
 namespace Presentation.Common.Api;
 
-public static class BuilderExtensions
+internal static class BuilderExtensions
 {
     public static void AddConfiguration(
         this WebApplicationBuilder builder)

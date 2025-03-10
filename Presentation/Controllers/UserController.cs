@@ -16,7 +16,7 @@ namespace Presentation.Controllers;
 
 [ApiController]
 [Route("user")]
-public class UserController(IMediator mediator) : InternalControllerBase
+internal class UserController(IMediator mediator) : InternalControllerBase
 {
     [HttpPost("login")]
     [ApiKey]

@@ -6,7 +6,7 @@ using MediatR;
 
 namespace Application.UseCases.User.Login;
 
-public class Handler : IRequestHandler<Request, Response>
+internal class Handler : IRequestHandler<Request, Response>
 {
     private readonly IUserRepository _userRepository;
     private readonly ITokenService _tokenService;
