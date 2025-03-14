@@ -37,13 +37,12 @@ internal class Handler : IRequestHandler<Request, Response>
         if (user.Notifications.Any())
             return new Response(404, "Request invalid",user.Notifications.ToList());
         
-        await _userRepository.CreateAsync(user, cancellationToken);
-        await _dbCommit.Commit(cancellationToken);
-        
         await _emailService.SendEmailAsync(user.FullName.FirstName, user.Email.Address!, "Ative sua Conta!",
             $"<strong> Seu código de Ativação da Conta: {user.TokenActivate} <strong>", "KMLogger",
             Configuration.SmtpUser, cancellationToken);
-        
+
+        await _userRepository.CreateAsync(user, cancellationToken);
+        await _dbCommit.Commit(cancellationToken);
         return _mapper.Map<Response>(user);
     }
 }

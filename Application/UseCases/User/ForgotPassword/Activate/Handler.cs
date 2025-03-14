@@ -10,14 +10,11 @@ namespace Application.UseCases.User.ForgotPassword.Activate;
 internal class Handler : IRequestHandler<Request, BaseResponse>
 {
     private readonly IUserRepository _userRepository;
-    private readonly IMapper _mapper;
     private readonly IDbCommit _dbCommit;
 
-
-    public Handler(IUserRepository userRepository, IMapper mapper, IDbCommit dbCommit)
+    public Handler(IUserRepository userRepository, IDbCommit dbCommit)
     {
         _userRepository = userRepository;
-        _mapper = mapper;
         _dbCommit = dbCommit;
     }
 
