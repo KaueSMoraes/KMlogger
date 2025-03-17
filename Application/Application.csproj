@@ -26,10 +26,7 @@
 
     <ItemGroup>
       <Folder Include="UseCases\App\" />
-      <Folder Include="UseCases\BusinessToken\" />
-      <Folder Include="UseCases\Business\" />
       <Folder Include="UseCases\Category\" />
-      <Folder Include="UseCases\Log\" />
     </ItemGroup>
 
 

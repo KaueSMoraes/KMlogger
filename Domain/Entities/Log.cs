@@ -6,14 +6,14 @@ using Environment = Domain.Enums.Environment;
 
 namespace Domain.Entities;
 
-public  class Log : Entity
+public  class LogEnrty : Entity
 {
     public Environment Environment { get; private set; }  
-    public Enum? Level { get; private set; }  
+    public Level? Level { get; private set; }  
     public Description? Message { get; private set; }
     public Description? StackTrace { get; private set; } 
-    private Log(){}
-    public Log(Environment environment, Enum? level, Description? message, Description? stackTrace)
+    private LogEnrty(){}
+    public LogEnrty(Environment environment, Level? level, Description? message, Description? stackTrace)
     {
         AddNotificationsFromValueObjects(message, stackTrace);
         Environment = environment;
