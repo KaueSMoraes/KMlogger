@@ -10,14 +10,13 @@ public class User : Entity
     public Address Address { get; private set; }
     public Password Password { get; private set; } 
     public bool Active { get; private set; }
-    
     public IList<Role> Roles { get; private set; }
     public long TokenActivate { get; private set; }
     
     [NotMapped]
     public string Token { get; private set; }
     
-    private User(){}
+    protected User(){}
     
     public User(FullName? fullName, Email? email, Address? address, bool active, Password? password)
     {
@@ -53,4 +52,12 @@ public class User : Entity
         Active = isActivate;
         TokenActivate = 0;
     } 
+
+    public void AssignRole(Role role)
+    {
+        if (Roles == null)
+            Roles = new List<Role>();
+
+        Roles.Add(role);
+    }
 }

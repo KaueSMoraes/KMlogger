@@ -13,14 +13,16 @@ using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Application.DI;
+using Nest;
 
 namespace Presentation.Common.Api;
 
-internal static class BuilderExtensions
+public  static class BuilderExtensions
 {
     public static void AddConfiguration(
         this WebApplicationBuilder builder)
     {
+        var projectRoot = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\.."));
         Configuration.IsDevelopment = builder.Environment.IsDevelopment();
         Configuration.JwtKey = Environment.GetEnvironmentVariable("JWT_KEY") ?? string.Empty;
         Configuration.BackendUrl = Environment.GetEnvironmentVariable("BACKEND_URL") ?? string.Empty;
@@ -28,27 +30,16 @@ internal static class BuilderExtensions
         Configuration.ApiKey = Environment.GetEnvironmentVariable("API_KEY") ?? string.Empty;
         Configuration.ApiKeyAttribute = "X-API-KEY";
         Configuration.FrontendUrl = Environment.GetEnvironmentVariable("FRONTEND_URL") ?? "http://localhost:4200";
-        Configuration.AwsKeyId = Environment.GetEnvironmentVariable("AWS_KEY_ID") ?? string.Empty;
-        Configuration.AwsKeySecret = Environment.GetEnvironmentVariable("AWS_KEY_SECRET") ?? string.Empty;
-        Configuration.AwsRegion = Environment.GetEnvironmentVariable("AWS_REGION") ?? string.Empty;
-        Configuration.BucketImages = Environment.GetEnvironmentVariable("BUCKET_IMAGES") ?? string.Empty;
         Configuration.SmtpUser = Environment.GetEnvironmentVariable("SMTP_USER") ?? string.Empty;
         Configuration.SmtpServer = Environment.GetEnvironmentVariable("SMTP_SERVER") ?? string.Empty;
         Configuration.SmtpPort = int.TryParse(Environment.GetEnvironmentVariable("SMTP_PORT"), out var smtpPort) ? smtpPort : 587;
         Configuration.SmtpPass = Environment.GetEnvironmentVariable("SMTP_PASS") ?? string.Empty;
-        Configuration.BucketVideos = Environment.GetEnvironmentVariable("BUCKET_VIDEOS") ?? string.Empty;
-        Configuration.DurationUrlTempVideos = 24;
-        Configuration.DurationUrlTempImage = 24;
-        Configuration.Database = Environment.GetEnvironmentVariable("DATABASE") ?? string.Empty;
-        Configuration.UserNameDatabase = Environment.GetEnvironmentVariable("USERNAME_DATABASE") ?? string.Empty;
-        Configuration.HostDatabase = Environment.GetEnvironmentVariable("HOST_DATABASE") ?? string.Empty;
-        Configuration.PassWordDatabase = Environment.GetEnvironmentVariable("PASSWORD_DATABASE") ?? string.Empty;
-        Configuration.PortDatabase = int.TryParse(Environment.GetEnvironmentVariable("PORT_DATABASE"), out var portdatabase) ? portdatabase : 5432;
+        Configuration.SqliteConnectionString = "Data Source=" + Path.GetFullPath(Path.Combine(projectRoot, "Infrastructure", "dbkmlogger.db"));
         builder.Services.AddControllers(options =>
     {
         options.Filters.Add(new ProducesAttribute("application/json"));
         options.ReturnHttpNotAcceptable = true;
-    }).EnableInternalControllers().ConfigureApiBehaviorOptions(options =>
+    }).ConfigureApiBehaviorOptions(options =>
     {
         options.SuppressModelStateInvalidFilter = true;})
     .AddJsonOptions(x =>
@@ -93,7 +84,12 @@ internal static class BuilderExtensions
         builder
             .Services
             .AddDbContext<KMLoggerDbContext>(
-                x => { x.UseNpgsql(StringConnection.BuildConnectionString()); });
+                x => { x.UseSqlite(Configuration.SqliteConnectionString); });
+
+        var settings = new ConnectionSettings(new Uri("http://localhost:9200"))
+            .DefaultIndex("logs");
+        var elasticClient = new ElasticClient(settings);
+        builder.Services.AddSingleton(elasticClient);
     }
 
     public static void AddCrossOrigin(this WebApplicationBuilder builder)

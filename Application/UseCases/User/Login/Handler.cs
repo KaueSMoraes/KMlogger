@@ -6,7 +6,7 @@ using MediatR;
 
 namespace Application.UseCases.User.Login;
 
-internal class Handler : IRequestHandler<Request, Response>
+public  class Handler : IRequestHandler<Request, Response>
 {
     private readonly IUserRepository _userRepository;
     private readonly ITokenService _tokenService;
@@ -23,7 +23,7 @@ internal class Handler : IRequestHandler<Request, Response>
         var isAuthenticated = await _userRepository.Authenticate(user, cancellationToken);
 
         if (!isAuthenticated || user.Notifications.Any())
-            return new Response(403, "Not Authorized" ,user.Notifications.ToList());
+            return new Response(403, "Invalid password or user" ,user.Notifications.ToList());
         
         var token = _tokenService.GenerateToken(user);
         user.AssignToken(token); 

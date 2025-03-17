@@ -128,7 +128,7 @@ public class FakeUserRepository : IUserRepository
         return Task.FromResult(isAuthenticated);
     }
 
-    public Task<bool> ActivateUserAsync(string email, long token, CancellationToken cancellationToken)
+    public Task<User?> ActivateUserAsync(string email, long token, CancellationToken cancellationToken)
     {
         var user = _users.Values.FirstOrDefault(x =>
             !x.Active && x.Email.Address == email && x.TokenActivate == token);
@@ -137,10 +137,10 @@ public class FakeUserRepository : IUserRepository
         {
             user.AssignActivate(true);
             Update(user);
-            return Task.FromResult(true);
+            return Task.FromResult(user);
         }
 
-        return Task.FromResult(false);
+        return Task.FromResult(user);
     }
 
     public Task<User?> GetByEmail(string email, CancellationToken cancellationToken)

@@ -9,7 +9,7 @@ using MediatR;
 
 namespace Application.UseCases.User.Register;
 
-internal class Handler : IRequestHandler<Request, Response>
+public  class Handler : IRequestHandler<Request, Response>
 {
     private readonly IUserRepository _userRepository;
     private readonly IMapper _mapper;
@@ -37,8 +37,9 @@ internal class Handler : IRequestHandler<Request, Response>
         if (user.Notifications.Any())
             return new Response(404, "Request invalid",user.Notifications.ToList());
         
+        var activationLink = $"{Configuration.FrontendUrl}/activate-account?email={Uri.EscapeDataString(user.Email.Address)}&token={Uri.EscapeDataString(user.TokenActivate.ToString())}";
         await _emailService.SendEmailAsync(user.FullName.FirstName, user.Email.Address!, "Ative sua Conta!",
-            $"<strong> Seu código de Ativação da Conta: {user.TokenActivate} <strong>", "KMLogger",
+            $"<strong> Clique no link para ativar sua conta: <a href='{activationLink}'>Ativar Conta</a> <strong>", "KMLogger",
             Configuration.SmtpUser, cancellationToken);
 
         await _userRepository.CreateAsync(user, cancellationToken);

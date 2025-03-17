@@ -8,30 +8,36 @@
 
       <ItemGroup>
         <ProjectReference Include="..\Domain\Domain.csproj" />
-        <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+        <AssemblyAttribute Include="System.Runtime.CompilerServices.public sVisibleTo">
             <_Parameter1>Application</_Parameter1>
         </AssemblyAttribute>
 
-        <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+        <AssemblyAttribute Include="System.Runtime.CompilerServices.public sVisibleTo">
             <_Parameter1>Presentation</_Parameter1>
         </AssemblyAttribute>
 
-        <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+        <AssemblyAttribute Include="System.Runtime.CompilerServices.public sVisibleTo">
             <_Parameter1>Test</_Parameter1>
         </AssemblyAttribute>
     </ItemGroup>
 
       <ItemGroup>
+        <PackageReference Include="Elasticsearch.Net" Version="7.17.5" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.2">
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
           <PrivateAssets>all</PrivateAssets>
         </PackageReference>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.2" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.2" />
         <PackageReference Include="Microsoft.Extensions.Http" Version="9.0.2" />
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.2" />
+        <PackageReference Include="NEST" Version="7.17.5" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.3" />
         <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.5.0" />
+      </ItemGroup>
+
+      <ItemGroup>
+        <Folder Include="Data\Migrations\" />
       </ItemGroup>
     
 

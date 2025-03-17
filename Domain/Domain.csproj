@@ -11,22 +11,22 @@
       <PackageReference Include="Flunt.br" Version="2.0.0" />
     </ItemGroup>
 
-      <!-- Permite que o projeto de testes acesse membros 'internal' do projeto de domínio -->
+      <!-- Permite que o projeto de testes acesse membros 'public ' do projeto de domínio -->
     <ItemGroup>
-        <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+        <AssemblyAttribute Include="System.Runtime.CompilerServices.public sVisibleTo">
             <_Parameter1>Test</_Parameter1>
         </AssemblyAttribute>
-        <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+        <AssemblyAttribute Include="System.Runtime.CompilerServices.public sVisibleTo">
             <_Parameter1>DynamicProxyGenAssembly2</_Parameter1>
         </AssemblyAttribute>
-        <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+        <AssemblyAttribute Include="System.Runtime.CompilerServices.public sVisibleTo">
             <_Parameter1>Infrastructure</_Parameter1>
         </AssemblyAttribute>
-        <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+        <AssemblyAttribute Include="System.Runtime.CompilerServices.public sVisibleTo">
             <_Parameter1>Application</_Parameter1>
         </AssemblyAttribute>
 
-        <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+        <AssemblyAttribute Include="System.Runtime.CompilerServices.public sVisibleTo">
             <_Parameter1>Presentation</_Parameter1>
         </AssemblyAttribute>
     </ItemGroup>

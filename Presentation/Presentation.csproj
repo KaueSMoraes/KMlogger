@@ -17,7 +17,7 @@
       <ProjectReference Include="../Application/Application.csproj" />
       <ProjectReference Include="../Domain/Domain.csproj" />
       <ProjectReference Include="../Infrastructure/Infrastructure.csproj" />
-       <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+       <AssemblyAttribute Include="System.Runtime.CompilerServices.public sVisibleTo">
             <_Parameter1>Microsoft.AspNetCore.Mvc</_Parameter1>
         </AssemblyAttribute>
     </ItemGroup>

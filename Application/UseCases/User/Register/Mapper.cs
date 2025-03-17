@@ -23,7 +23,7 @@ public class Mapper : Profile
         CreateMap<Domain.Entities.User, Response>()
             .ConstructUsing(user => new Response(
                 201, 
-                "User created successfully",
+                "User created successfully. An email has been sent to activate the account",
                 user.Notifications.ToList()
             ));
     }

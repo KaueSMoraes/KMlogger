@@ -1,22 +1,21 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
-using Npgsql;
 
 namespace Infrastructure.Data;
 
-public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<KMLoggerDbContext>
+public  class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<KMLoggerDbContext>
 {
     public KMLoggerDbContext CreateDbContext(string[] args)
     {
+        var databasePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\Infrastructure\dbkmlogger.db");
         try
         {
-            var connectionString = args.FirstOrDefault() ?? StringConnection.BuildConnectionString();
-            if (string.IsNullOrEmpty(connectionString))
+            if (string.IsNullOrEmpty(databasePath))
                 throw new Exception("A connection string must be provided.");
-
+                
             var builder = new DbContextOptionsBuilder<KMLoggerDbContext>();
-            builder.UseNpgsql(connectionString);
+            builder.UseSqlite(Path.GetFullPath(databasePath));
             var context = new KMLoggerDbContext(builder.Options);
             return context;
         }
@@ -25,20 +24,5 @@ public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<KMLoggerDb
             Console.WriteLine($"An error occurred: {ex.Message}");
             throw;
         }
-    }
-}
-
-public static class StringConnection
-{
-    public static string BuildConnectionString()
-    {
-        var builder = new NpgsqlConnectionStringBuilder
-        {
-            Host = Environment.GetEnvironmentVariable("HOST_DATABASE") ?? string.Empty , Port = int.TryParse(Environment.GetEnvironmentVariable("PORT_DATABASE"), 
-                out var portdatabase) ? portdatabase : 5432, Database = Environment.GetEnvironmentVariable("DATABASE") ?? string.Empty,
-            Username = Environment.GetEnvironmentVariable("USERNAME_DATABASE") ?? string.Empty,
-            Password = Environment.GetEnvironmentVariable("PASSWORD_DATABASE") ?? string.Empty
-        };
-        return builder.ConnectionString;
     }
 }

@@ -3,56 +3,175 @@ using System;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace Infrastructure.Data.Migrations
+namespace Infrastructure.Migrations
 {
     [DbContext(typeof(KMLoggerDbContext))]
-    partial class KMLoggerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250316172336_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.2")
-                .HasAnnotation("Relational:MaxIdentifierLength", 63);
+            modelBuilder.HasAnnotation("ProductVersion", "9.0.2");
 
-            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+            modelBuilder.Entity("Domain.Entities.App", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("Id");
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<Guid>("CategoryId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("CategoryId1")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp")
+                        .HasColumnName("CreatedDate")
+                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("timestamp")
+                        .HasColumnName("DeletedDate");
+
+                    b.Property<int?>("Environment")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("timestamp")
+                        .HasColumnName("UpdatedDate")
+                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+                    b.HasKey("Id")
+                        .HasName("PK_App");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("CategoryId1");
+
+                    b.ToTable("App", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.Entities.Category", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("Id");
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("Active");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp")
+                        .HasColumnName("CreatedDate")
+                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("timestamp")
+                        .HasColumnName("DeletedDate");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("timestamp")
+                        .HasColumnName("UpdatedDate")
+                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+                    b.HasKey("Id")
+                        .HasName("PK_Categories");
+
+                    b.ToTable("Categories", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.Entities.Log", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("Id");
+
+                    b.Property<Guid?>("AppId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp")
+                        .HasColumnName("CreatedDate")
+                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("timestamp")
+                        .HasColumnName("DeletedDate");
+
+                    b.Property<int>("Environment")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("Environment");
+
+                    b.Property<string>("Level")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("Level");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("timestamp")
+                        .HasColumnName("UpdatedDate")
+                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+                    b.HasKey("Id")
+                        .HasName("PK_Logs");
+
+                    b.HasIndex("AppId");
+
+                    b.ToTable("Logs", (string)null);
+                });
 
             modelBuilder.Entity("Domain.Entities.Picture", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("TEXT");
 
                     b.Property<bool>("Ativo")
-                        .HasColumnType("boolean")
+                        .HasColumnType("INTEGER")
                         .HasColumnName("Ativo");
 
                     b.Property<string>("AwsKey")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("TEXT")
                         .HasColumnName("AwsKey");
 
                     b.Property<DateTime?>("CreatedDate")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime>("UrlExpired")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("TEXT")
                         .HasColumnName("UrlExpired");
 
                     b.Property<string>("UrlTemp")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("TEXT")
                         .HasColumnName("UrlTemp");
 
                     b.HasKey("Id");
@@ -77,7 +196,7 @@ namespace Infrastructure.Data.Migrations
 
                     b.Property<string>("Slug")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasColumnType("TEXT")
                         .HasColumnName("Slug");
 
                     b.Property<DateTime>("UpdatedDate")
@@ -98,7 +217,7 @@ namespace Infrastructure.Data.Migrations
                         .HasColumnName("Id");
 
                     b.Property<bool>("Active")
-                        .HasColumnType("boolean")
+                        .HasColumnType("INTEGER")
                         .HasColumnName("Active");
 
                     b.Property<DateTime?>("CreatedDate")
@@ -112,7 +231,7 @@ namespace Infrastructure.Data.Migrations
                         .HasColumnName("DeletedDate");
 
                     b.Property<long>("TokenActivate")
-                        .HasColumnType("bigint")
+                        .HasColumnType("INTEGER")
                         .HasColumnName("TokenActivate");
 
                     b.Property<DateTime>("UpdatedDate")
@@ -142,16 +261,122 @@ namespace Infrastructure.Data.Migrations
                     b.ToTable("UserRole");
                 });
 
+            modelBuilder.Entity("Domain.Entities.App", b =>
+                {
+                    b.HasOne("Domain.Entities.Category", null)
+                        .WithMany("Apps")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId1")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.OwnsOne("Domain.ValueObjects.UniqueName", "Name", b1 =>
+                        {
+                            b1.Property<Guid>("AppId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<string>("Name")
+                                .IsRequired()
+                                .HasColumnType("TEXT")
+                                .HasColumnName("Name");
+
+                            b1.HasKey("AppId");
+
+                            b1.ToTable("App");
+
+                            b1.WithOwner()
+                                .HasForeignKey("AppId");
+                        });
+
+                    b.Navigation("Category");
+
+                    b.Navigation("Name");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Category", b =>
+                {
+                    b.OwnsOne("Domain.ValueObjects.UniqueName", "Name", b1 =>
+                        {
+                            b1.Property<Guid>("CategoryId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<string>("Name")
+                                .IsRequired()
+                                .HasColumnType("TEXT")
+                                .HasColumnName("Name");
+
+                            b1.HasKey("CategoryId");
+
+                            b1.ToTable("Categories");
+
+                            b1.WithOwner()
+                                .HasForeignKey("CategoryId");
+                        });
+
+                    b.Navigation("Name");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Log", b =>
+                {
+                    b.HasOne("Domain.Entities.App", null)
+                        .WithMany("Logs")
+                        .HasForeignKey("AppId");
+
+                    b.OwnsOne("Domain.ValueObjects.Description", "Message", b1 =>
+                        {
+                            b1.Property<Guid>("LogId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<string>("Text")
+                                .IsRequired()
+                                .HasColumnType("TEXT")
+                                .HasColumnName("Message");
+
+                            b1.HasKey("LogId");
+
+                            b1.ToTable("Logs");
+
+                            b1.WithOwner()
+                                .HasForeignKey("LogId");
+                        });
+
+                    b.OwnsOne("Domain.ValueObjects.Description", "StackTrace", b1 =>
+                        {
+                            b1.Property<Guid>("LogId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<string>("Text")
+                                .HasColumnType("TEXT")
+                                .HasColumnName("StackTrace");
+
+                            b1.HasKey("LogId");
+
+                            b1.ToTable("Logs");
+
+                            b1.WithOwner()
+                                .HasForeignKey("LogId");
+                        });
+
+                    b.Navigation("Message");
+
+                    b.Navigation("StackTrace");
+                });
+
             modelBuilder.Entity("Domain.Entities.Picture", b =>
                 {
                     b.OwnsOne("Domain.ValueObjects.UniqueName", "Name", b1 =>
                         {
                             b1.Property<Guid>("PictureId")
-                                .HasColumnType("uuid");
+                                .HasColumnType("TEXT");
 
                             b1.Property<string>("Name")
                                 .IsRequired()
-                                .HasColumnType("text")
+                                .HasColumnType("TEXT")
                                 .HasColumnName("Name");
 
                             b1.HasKey("PictureId");
@@ -165,15 +390,15 @@ namespace Infrastructure.Data.Migrations
                     b.OwnsOne("Domain.ValueObjects.AppFile", "File", b1 =>
                         {
                             b1.Property<Guid>("PictureId")
-                                .HasColumnType("uuid");
+                                .HasColumnType("TEXT");
 
                             b1.Property<string>("FileName")
                                 .IsRequired()
-                                .HasColumnType("text")
+                                .HasColumnType("TEXT")
                                 .HasColumnName("FileName");
 
                             b1.Property<long>("FileSize")
-                                .HasColumnType("bigint")
+                                .HasColumnType("INTEGER")
                                 .HasColumnName("FileSize");
 
                             b1.HasKey("PictureId");
@@ -201,7 +426,7 @@ namespace Infrastructure.Data.Migrations
                             b1.Property<string>("Name")
                                 .IsRequired()
                                 .HasMaxLength(100)
-                                .HasColumnType("character varying(100)");
+                                .HasColumnType("TEXT");
 
                             b1.HasKey("RoleId");
 
@@ -237,7 +462,7 @@ namespace Infrastructure.Data.Migrations
 
                             b1.Property<string>("Road")
                                 .HasMaxLength(100)
-                                .HasColumnType("character varying(100)")
+                                .HasColumnType("TEXT")
                                 .HasColumnName("Road");
 
                             b1.HasKey("UserId");
@@ -255,7 +480,7 @@ namespace Infrastructure.Data.Migrations
 
                             b1.Property<string>("Address")
                                 .HasMaxLength(50)
-                                .HasColumnType("character varying(50)")
+                                .HasColumnType("TEXT")
                                 .HasColumnName("Email");
 
                             b1.HasKey("UserId");
@@ -274,13 +499,13 @@ namespace Infrastructure.Data.Migrations
                             b1.Property<string>("FirstName")
                                 .IsRequired()
                                 .HasMaxLength(100)
-                                .HasColumnType("character varying(100)")
+                                .HasColumnType("TEXT")
                                 .HasColumnName("FirstName");
 
                             b1.Property<string>("LastName")
                                 .IsRequired()
                                 .HasMaxLength(100)
-                                .HasColumnType("character varying(100)")
+                                .HasColumnType("TEXT")
                                 .HasColumnName("LastName");
 
                             b1.HasKey("UserId");
@@ -298,12 +523,12 @@ namespace Infrastructure.Data.Migrations
 
                             b1.Property<string>("Hash")
                                 .IsRequired()
-                                .HasColumnType("text")
+                                .HasColumnType("TEXT")
                                 .HasColumnName("Hash");
 
                             b1.Property<string>("Salt")
                                 .IsRequired()
-                                .HasColumnType("text")
+                                .HasColumnType("TEXT")
                                 .HasColumnName("Salt");
 
                             b1.HasKey("UserId");
@@ -342,6 +567,16 @@ namespace Infrastructure.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("FK_UserRole_UserId");
+                });
+
+            modelBuilder.Entity("Domain.Entities.App", b =>
+                {
+                    b.Navigation("Logs");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Category", b =>
+                {
+                    b.Navigation("Apps");
                 });
 #pragma warning restore 612, 618
         }

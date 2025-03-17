@@ -10,7 +10,7 @@ using Microsoft.IdentityModel.Tokens;
 namespace Infrastructure.Services;
 
 
-public sealed class TokenService : ITokenService
+public  sealed class TokenService : ITokenService
 {
     public string GenerateToken(User user)
     {
@@ -26,7 +26,7 @@ public sealed class TokenService : ITokenService
     }
 }
 
-public static class RoleClaimsExtensions
+public  static class RoleClaimsExtensions
 {
     public static IEnumerable<Claim> GetClaims(this User user)
     {   

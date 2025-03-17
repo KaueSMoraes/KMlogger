@@ -15,13 +15,21 @@
       <ProjectReference Include="../Domain/Domain.csproj" />
       <ProjectReference Include="../Infrastructure/Infrastructure.csproj" />
       
-        <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+        <AssemblyAttribute Include="System.Runtime.CompilerServices.public sVisibleTo">
             <_Parameter1>Presentation</_Parameter1>
         </AssemblyAttribute>
 
-                <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+                <AssemblyAttribute Include="System.Runtime.CompilerServices.public sVisibleTo">
             <_Parameter1>Test</_Parameter1>
         </AssemblyAttribute>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="UseCases\App\" />
+      <Folder Include="UseCases\BusinessToken\" />
+      <Folder Include="UseCases\Business\" />
+      <Folder Include="UseCases\Category\" />
+      <Folder Include="UseCases\Log\" />
     </ItemGroup>
 
 

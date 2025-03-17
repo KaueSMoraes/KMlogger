@@ -59,7 +59,7 @@ public class UserRepositoryTests
         var isActivated = await _fakeRepository.ActivateUserAsync(user.Email.Address!, invalidToken, CancellationToken.None);
 
         // Assert
-        isActivated.Should().BeFalse();
+        isActivated.Active.Should().BeFalse();
         var updatedUser = await _fakeRepository.GetById(user.Id, CancellationToken.None);
         updatedUser!.Active.Should().BeFalse();
     }

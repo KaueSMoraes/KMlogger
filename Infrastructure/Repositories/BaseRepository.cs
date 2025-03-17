@@ -7,15 +7,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories;
 
-public class BaseRepository<T>(KMLoggerDbContext context)
+public abstract class BaseRepository<T>(KMLoggerDbContext context)
     : IBaseRepository<T>
     where T : Entity
 {
     public virtual async Task CreateAsync(T entity,
         CancellationToken cancellationToken)
-    {
-        await context.AddAsync(entity, cancellationToken);
-    }
+    => await context.AddAsync(entity, cancellationToken);
 
     public virtual async Task<T> CreateReturnEntity(T entity,
         CancellationToken cancellationToken)
@@ -31,18 +29,14 @@ public class BaseRepository<T>(KMLoggerDbContext context)
 
     public virtual async Task DeleteAsync(T entity,
         CancellationToken cancellationToken = default)
-    {
-        await Task.Run(() => context.Remove(entity),
+    => await Task.Run(() => context.Remove(entity),
             cancellationToken);
-    }
 
     public virtual async Task<List<T>> GetAll(
         CancellationToken cancellationToken)
-    {
-        return await context.Set<T>().AsNoTracking()
+        => await context.Set<T>().AsNoTracking()
                     .ToListAsync(cancellationToken)
                 ?? throw new Exception("No entities found");
-    }
 
     public virtual async Task<T?> GetWithParametersAsync(
         Expression<Func<T, bool>>? filter = null,

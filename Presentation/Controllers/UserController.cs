@@ -7,6 +7,7 @@ using Presentation.Middlewares;
 using LoginRequest = Application.UseCases.User.Login.Request;
 using RegisterRequest = Application.UseCases.User.Register.Request;
 using ActivateRequest = Application.UseCases.User.Activate.Request;
+using ActivatePasswordRequest = Application.UseCases.User.ForgotPassword.Activate.Request;
 using ForgotRequest = Application.UseCases.User.ForgotPassword.Request;
 using ResendCodeRequest = Application.UseCases.User.ResendCode.Request;
 
@@ -16,7 +17,7 @@ namespace Presentation.Controllers;
 
 [ApiController]
 [Route("user")]
-internal class UserController(IMediator mediator) : InternalControllerBase
+public  class UserController(IMediator mediator) : ControllerBase
 {
     [HttpPost("login")]
     [ApiKey]
@@ -30,7 +31,7 @@ internal class UserController(IMediator mediator) : InternalControllerBase
         }
         catch (Exception e) 
         {
-             return StatusCode(500 ,e.Message);
+            return StatusCode(500 , new {message = e.Message});
         }
     }
 
@@ -46,27 +47,27 @@ internal class UserController(IMediator mediator) : InternalControllerBase
         }
         catch (SmtpException e)
         {
-            return BadRequest("Email does not exist or is invalid");
+            return BadRequest( new {message = e.Message});
         }
         catch (Exception e) 
         {
-            return StatusCode(500 ,e.Message);
+            return StatusCode(500 , new {message = e.Message});
         }
     }
     
     [HttpPut("activate")]
     [ApiKey]
-    public async Task<IActionResult> Activate([FromQuery] long token, [FromQuery] string email, CancellationToken cancellationToken)
+    public async Task<IActionResult> Activate([FromQuery] string code, [FromQuery] string email, CancellationToken cancellationToken)
     {
         if (!ModelState.IsValid) return BadRequest();   
         try
         {
-            var response = await mediator.Send(new ActivateRequest(email, token), cancellationToken);
+            var response = await mediator.Send(new ActivateRequest(email, long.TryParse(code, out var tokenlong) ? tokenlong : 0), cancellationToken);
             return StatusCode(response.statuscode, response);
         }
         catch (Exception e) 
         {
-            return StatusCode(500 ,e.Message.ToString());
+            return StatusCode(500 , new {message = e.Message});
         }
     }
 
@@ -81,7 +82,7 @@ internal class UserController(IMediator mediator) : InternalControllerBase
         }
         catch(Exception e)
         {
-            return StatusCode(500, e.Message);
+           return StatusCode(500 , new {message = e.Message});
         }
     }
 
@@ -96,16 +97,17 @@ internal class UserController(IMediator mediator) : InternalControllerBase
         }
         catch(Exception e)
         {
-            return StatusCode(500, e.Message);
+           return StatusCode(500 , new {message = e.Message});
         }
     }
     
     
     [HttpPut("forgot-password/activate")]
     [ApiKey]    
-    public async Task<IActionResult> ForgotPassword(ActivateRequest
+    public async Task<IActionResult> ForgotPasswordActivate(ActivatePasswordRequest
         request, CancellationToken cancellationToken)
     {
+        if(!ModelState.IsValid) return BadRequest();
         try
         {
             var response = await mediator.Send(request, cancellationToken);
@@ -113,7 +115,7 @@ internal class UserController(IMediator mediator) : InternalControllerBase
         }
         catch(Exception e)
         {
-            return StatusCode(500, e.Message);
+           return StatusCode(500 , new {message = e.Message});
         }
     }
 }
