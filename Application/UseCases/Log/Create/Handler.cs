@@ -20,7 +20,7 @@ public class Handler : IRequestHandler<Request, BaseResponse>
     public async Task<BaseResponse> Handle(Request request, CancellationToken cancellationToken)
     {
         var log = _mapper.Map<LogEnrty>(request);
-        await _logRepository.CreateAsync(log, cancellationToken);
+        await _logRepository.SaveAsync(log, cancellationToken);
         return new BaseResponse(201, "Log created successfully");
     }
 }

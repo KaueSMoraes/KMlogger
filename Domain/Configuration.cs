@@ -11,6 +11,7 @@ public static class Configuration
     public static string SmtpServer { get; set; } = string.Empty;
     public static string JwtKey { get; set; } = string.Empty;
     public static int SmtpPort { get; set; } = 587;
+    public static string ConnectionStringClickHouse { get; set; } = string.Empty;
     public static string VersionApi { get; set; } = string.Empty;
     public static string SmtpUser { get; set; } = string.Empty;
     public static string SmtpPass { get; set; } = string.Empty;

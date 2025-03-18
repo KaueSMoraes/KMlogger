@@ -6,7 +6,5 @@ using Nest;
 
 namespace Infrastructure.Repositories;
 
-public class LogRepository : ElasticBaseRepository<Log>, ILogRepository
-{
-    public LogRepository(ElasticClient client) : base(client, "logs") { }
-}
+public class LogRepository(ElasticClient client) 
+    : ClickHouseClient<LogEnrty>(client, "logs"), ILogRepository;

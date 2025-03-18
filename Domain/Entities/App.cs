@@ -10,12 +10,12 @@ public  class App : Entity
     public UniqueName? Name { get; private set; }
     public Category Category { get; private set; }
     public Environment? Environment { get; private set; }
-    public List<Log>? Logs {get; private set;}
+    public List<LogEnrty>? Logs {get; private set;}
     public bool? Active { get; private set; }
 
     private App(){}
     public App( UniqueName? name, Category? category,
-         Environment? environment, List<Log> logs, bool? active)
+         Environment? environment, List<LogEnrty> logs, bool? active)
     {
         Name = name;
         Category = category;

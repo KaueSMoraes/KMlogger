@@ -4,7 +4,7 @@ using Domain.Interfaces.Repositories;
 
 namespace Domain.Interfaces;
 
-public interface ICategoryRepository : IElasticBaseRepository<Category>
+public interface ICategoryRepository : IClickHouseClientRepository<Category>
 {
 
 }

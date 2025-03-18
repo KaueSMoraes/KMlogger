@@ -1,4 +1,5 @@
 using System;
+using Domain.Interfaces;
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
 using Infrastructure.Repositories;
@@ -16,6 +17,9 @@ public static class ServicesExtensions
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<ITokenService, TokenService>();
         services.AddScoped<IEmailService, EmailService>();
+        services.AddScoped<ILogRepository, LogRepository>();
+        services.AddScoped<ICategoryRepository, CategoryRepository>();
+        services.AddScoped<IAppRepository, AppRepository>();
         services.AddHttpClient();
     }
 }

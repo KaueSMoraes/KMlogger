@@ -6,7 +6,5 @@ using Nest;
 
 namespace Infrastructure.Repositories;
 
-public class AppRepository : ElasticBaseRepository<App>, IAppRepository
-{
-    public AppRepository(ElasticClient client) : base(client, "apps") { }
-}
+public class AppRepository(ElasticClient client) 
+    : ClickHouseClient<App>(client, "apps"), IAppRepository;

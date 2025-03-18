@@ -3,6 +3,4 @@ using Domain.Entities;
 
 namespace Domain.Interfaces.Repositories;
 
-public interface ILogRepository : IElasticBaseRepository<LogEnrty>
-{
-}
+public interface ILogRepository : IClickHouseClientRepository<LogEnrty>;
