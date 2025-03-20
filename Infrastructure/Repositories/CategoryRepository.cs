@@ -1,9 +1,11 @@
 using System;
+using Domain;
 using Domain.Entities;
 using Domain.Interfaces;
 using Nest;
 
 namespace Infrastructure.Repositories;
 
-public class CategoryRepository(ElasticClient client)
-    : ClickHouseClient<Category>(client, "categories"), ICategoryRepository;
+public class CategoryRepository
+    : ClickHouseBaseRepository<Category>,
+     ICategoryRepository;

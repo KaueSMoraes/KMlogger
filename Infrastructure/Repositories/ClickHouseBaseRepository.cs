@@ -6,23 +6,22 @@ using System.Threading;
 using System.Threading.Tasks;
 using ClickHouse.Client.ADO;
 using ClickHouse.Client.ADO.Parameters;
+using Domain;
 using Domain.Entities;
 using Domain.Interfaces.Repositories;
 
 namespace Infrastructure.Repositories;
 
-public abstract class ClickHouseClientRepository<T>(string connectionString, string tableName) 
-    : IClickHouseClientRepository<T> where T : Entity
+public abstract class ClickHouseBaseRepository<T> 
+    : IClickHouseBaseRepository<T> where T : Entity
 {
-    protected readonly string _connectionString = connectionString;
-    protected readonly string _tableName = tableName;
-
+    protected readonly string _connectionString = Configuration.ConnectionStringClickHouse;
     public virtual async Task<T> GetByIdAsync(string id, CancellationToken cancellationToken)
     {
         using var connection = new ClickHouseConnection(_connectionString);
         await connection.OpenAsync(cancellationToken);
 
-        string query = $"SELECT * FROM {_tableName} WHERE id = @id LIMIT 1";
+        string query = $"SELECT * FROM {T.GetType()} WHERE id = @id LIMIT 1";
 
         using var command = connection.CreateCommand();
         command.CommandText = query;

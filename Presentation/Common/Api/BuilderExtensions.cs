@@ -86,11 +86,6 @@ public  static class BuilderExtensions
             .Services
             .AddDbContext<KMLoggerDbContext>(
                 x => { x.UseSqlite(Configuration.SqliteConnectionString); });
-
-        var settings = new ConnectionSettings(new Uri("http://localhost:9200"))
-            .DefaultIndex("logs");
-        var elasticClient = new ElasticClient(settings);
-        builder.Services.AddSingleton(elasticClient);
     }
 
     public static void AddCrossOrigin(this WebApplicationBuilder builder)

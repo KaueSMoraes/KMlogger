@@ -3,7 +3,7 @@ using Domain.Entities;
 
 namespace Domain.Interfaces.Repositories;
 
-public interface IClickHouseClientRepository<T> where T : Entity
+public interface IClickHouseBaseRepository<T> where T : Entity
 {
     Task<T> GetByIdAsync(string id, CancellationToken cancellationToken);
     Task<IEnumerable<T>> GetAllAsync(CancellationToken cancellationToken);
