@@ -13,7 +13,6 @@ using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Application.DI;
-using Nest;
 
 namespace Presentation.Common.Api;
 

@@ -5,6 +5,7 @@ using Environment = Domain.Enums.Environment;
 
 namespace Domain.Entities;
 
+[Table("Apps")]
 public  class App : Entity
 {
     public UniqueName? Name { get; private set; }
@@ -15,7 +16,7 @@ public  class App : Entity
 
     private App(){}
     public App( UniqueName? name, Category? category,
-         Environment? environment, List<LogEnrty> logs, bool? active)
+         Environment? environment, List<LogEnrty>? logs = null, bool? active)
     {
         Name = name;
         Category = category;

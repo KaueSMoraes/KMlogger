@@ -18,7 +18,7 @@ public class Handler : IRequestHandler<Request, BaseResponse>
     }
     public async Task<BaseResponse> Handle(Request request, CancellationToken cancellationToken)
     {
-        var log = await _logRepository.GetByIdAsync(request.Id.ToString(), cancellationToken);
+        var log = await _logRepository.GetByIdAsync(request.Id, cancellationToken);
         if(log is null) return new BaseResponse(404, "Log not found");
         return _mapper.Map<BaseResponse>(log);
     }

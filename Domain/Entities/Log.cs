@@ -6,6 +6,7 @@ using Environment = Domain.Enums.Environment;
 
 namespace Domain.Entities;
 
+[Table("Logs")]
 public  class LogEnrty : Entity
 {
     public Environment Environment { get; private set; }  

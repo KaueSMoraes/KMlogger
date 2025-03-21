@@ -24,10 +24,5 @@
         </AssemblyAttribute>
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="UseCases\App\" />
-      <Folder Include="UseCases\Category\" />
-    </ItemGroup>
-
 
 </Project>

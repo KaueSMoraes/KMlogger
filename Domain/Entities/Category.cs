@@ -3,6 +3,7 @@ using Domain.ValueObjects;
 
 namespace Domain.Entities;
 
+[Table("Categories")]
 public  class Category : Entity
 {
     public UniqueName? Name { get; private set; }
